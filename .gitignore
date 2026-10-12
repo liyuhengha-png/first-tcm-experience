@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+coverage/
+*.log
+.local-data/
+.pnpm-store/
+solana/target/
+solana/.anchor/
+solana/test-ledger/
+**/*-keypair.json
+.vercel/
+evidence/
+*.zip

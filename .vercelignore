@@ -1,0 +1,13 @@
+.env
+.env.*
+.local-data/
+.pnpm-store/
+node_modules/
+evidence/
+solana/
+coverage/
+*.log
+**/*-keypair.json
+RESUME.md
+TASKS.md
+SECURITY_CHECKLIST.md

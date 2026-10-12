@@ -1,0 +1,119 @@
+# First TCM Experience — milestone tracker
+
+Scope authority: user initially requested M0 only, then approved M1 and resumed it on 2026-10-11. On 2026-10-11 user authorized continuous progression through later stages, asking to be notified only when their action is required. This overrides per-milestone approval pauses; preserve every health-data/security gate. No commit, push, deployment or paid resources requested. M1 local and live Supabase synthetic booking/auth/isolation verified. Production readiness remains gated. See M1_REPORT.md and SUPABASE_SETUP.md.
+
+## M0 — scaffold and plan
+- [x] Read supplied instructions and PRD; inspect empty workspace, Git status and runtime.
+- [x] Shared React/Vite/TypeScript/Tailwind scaffold; both en and zh-CN dictionaries.
+- [x] Accessible responsive language switch, English default, locale-only preference and html lang.
+- [x] Disabled placeholders for Book, public-safe Confirmation, Journal and isolated Devnet demo.
+- [x] Placeholder-only .env.example, ignored local secrets, README and security checklist.
+- [x] Install local dependencies and retain pnpm-lock.yaml.
+- [x] Run lint, typecheck, build, 15 bilingual unit tests and dependency audit; exact results in M0_REPORT.md.
+- [x] Report M0 and stop for founder approval. M1 has not started.
+
+## M1 — public booking MVP (local and live synthetic integration verified)
+Confirmed test project: ymevtpojcyjfbxrtfpsu.supabase.co, Singapore, newly created empty project (user confirmation). Local ignored .env prepared; awaiting user entry of server secret and reviewed schema application. Modern secret-key support added with regression tests. Continuous progression remains authorized; preserve security gates.
+Connection update: local secret configured and recognized as modern; HTTPS RPC request returned 404/PGRST202 (function not in schema cache), no credentials logged. Awaiting user execution of transactional schema migration in Supabase SQL Editor; API secret does not provide SQL administration.
+After reported 42P07/bookings already exists: read_booking_receipt RPC now returns HTTP 200/null for an absent synthetic reference, indicating receipt function is present. No table dropped or migration rerun. Read-only schema/RLS/privilege inspection prepared in supabase/verify_booking_schema.sql; full cloud security verification still pending.
+User supplied all three verification result screenshots: four tables RLS enabled/forced; anon reads denied; authenticated writes denied; owner-only booking/consent SELECT policies; server-only function EXECUTE. Cloud API synthetic POST verified HTTP 201 and persisted safe REQUESTED receipt (server/cloud-smoke.ts). Live two-user JWT isolation awaits publishable key configuration; no claim it already passes.
+- [x] Both locales: Discover, Book, request receipt; localized errors, FAQs and versioned draft notices.
+- [ ] Legal review of notices before production.
+- [x] Typed server validation, parameterized local PostgreSQL persistence and tested booking RLS. Supabase adapter prepared.
+- [x] Live Supabase Auth/JWT/RLS two-user integration acceptance: managed login, own booking/consent reads, cross-user and anonymous denial, write/table/RPC denials verified with synthetic users in both locales.
+- [ ] Rate limits, request limits, challenge/honeypot, generic responses, audited operator permissions.
+- [x] UI locale separate from requested service language; switching preserves in-memory draft and consent state.
+- [x] Separate booking terms/privacy consent with purpose, version, locale, timestamp and affirmative evidence in local PostgreSQL.
+- [x] REQUESTED only; no invented availability or providers; pending manual handling if email unconfigured.
+- [x] Both-locale tests, real local browser request/receipt, anonymous receipt tests and PostgreSQL two-user booking isolation.
+
+Current verification: 41 unit/integration tests passed; lint and typecheck passed after cloud scripts. Live Supabase synthetic booking and two-user Auth/JWT/RLS checks passed. Preview uses Supabase and returns HTTP 200. Real Turnstile, audited operator workflow and production privacy readiness remain pending; full production acceptance is not claimed. Later stages are authorized, subject to security gates. Earlier connection notes above are historical.
+
+## M2 — secure journal, synthetic data first (continuous progression authorized; security gates remain)
+- [ ] User clarified PoE means Proof of Email / ZK Email, not Poe.com. Review Solana-compatible feasibility and privacy before implementation; do not substitute a wallet-only login or expose email identity onchain. Managed email OTP/magic-link remains the PRD authentication baseline.
+- [ ] Managed authentication; deny-by-default server ownership checks and Postgres RLS.
+- [ ] Reviewed AEAD envelope encryption before persistence; separate managed KMS, rotation and fail-closed writes.
+- [ ] Both locales: separate explicit consent, self-reported labeling, timeline, edit/export/delete and audited access.
+- [ ] Recent authentication for export/destructive actions; retention/deletion and encrypted backup caveats.
+- [ ] Two-user and operator-denial tests, no plaintext persistence, no private caching or translation leakage.
+- [ ] Real-data entry stays disabled until privacy/legal, institutional, hosting/transfer, KMS, auth, RLS and incident prerequisites are reviewed and verified.
+
+## M3 — isolated Solana Devnet escrow (awaiting approval)
+- [ ] Both locales: wallet confirmation, Devnet-only network validation and explicit non-payment disclaimer.
+- [ ] Random unlinked demo ID only; no patient identity, booking identifiers, health text or medical hashes onchain.
+- [ ] Anchor PDA/vault/signers/account constraints; checked math and strict state machine; no admin drain.
+- [ ] Local-validator happy path, attacker signer, wrong vault/recipient, double funding/release, refund and invalid-state tests.
+- [ ] Real confirmed deposit/release signatures and Devnet Explorer links; never simulate success.
+
+## M4 — hardening and release (awaiting approval)
+- [ ] CSP, HSTS, no-store/private noindex, security headers, CSRF/CORS and WAF verification.
+- [ ] CI dependency/secret scanning; bilingual accessibility/mobile checks; email safety if enabled.
+- [ ] Privacy impact assessment, vendor/DPA inventory, hosting/transfer review and provider verification.
+- [ ] Incident playbook, encrypted restore/deletion drill, operator MFA, deployment instructions and honest demo script.
+- [ ] Review acceptance criteria; deployment requires explicit authorization.
+
+
+## Current M2 update — 2026-10-11
+- [x] Shared bilingual fixed synthetic journal preview and demo-state preservation; no health text input or persistence.
+- [x] Managed Supabase email OTP adapter with schema validation and mocked tests; not wired to login endpoints or sessions.
+- [x] 45 tests / 6 files, lint, typecheck and build passed. See M2_REPORT.md.
+- [ ] Mail service/template confirmation, secure session endpoints, auth limits, KMS and journal persistence remain pending.
+
+Founder flow update: real email registration; separate Devnet test deposit demo; private Telegram contact https://t.me/liyuhengyoooo; manual group invitation and offline fees. Online real-money checkout deferred. Bilingual link implemented; lint/typecheck/build passed. Deposit gating not implemented.
+M2 independent work while DNS verifies: server auth request/verify/session/logout handler implemented and unit-tested; mail provider remains disabled. 49 tests across 7 files, lint/typecheck/build passed. Browser integration and journal/KMS remain pending.
+M2 UI update: bilingual email OTP request/verification/session/logout UI wired to same-origin endpoints; mail provider disabled pending verification. In-memory input survives locale changes and clears after verification; no credential browser persistence. 52 tests across 8 files, lint and build/typecheck passed.
+M2 encryption foundation implemented using standard Node AEAD and injected KMS interface; mock-only tests. Actual managed KMS and journal storage remain pending; no real health input enabled.
+M2 local journal schema/RLS and encrypted bilingual fixtures verified: 60 total tests, lint/build/typecheck pass. Cloud migration unapplied, actual KMS absent; no live journal writer. Readiness requirements documented in JOURNAL_READINESS.md.
+Account update: dedicated bilingual /login route and navigation added, independent of journal. OTP registration option is explicit server-side and defaults off; mail remains disconnected. No solana/anchor/cargo/rustc commands found on PATH; Devnet build/runtime setup requires further inspection before claiming availability.
+Devnet prerequisite inspection: no solana/anchor/cargo/rustc/docker on PATH; WSL executable present but usable Linux environment not established. Prepared DEVNET_IMPLEMENTATION_PLAN.md. System tool installation requires explicit approval per AGENTS rule 6; no installation, wallet action or deployment performed.
+Tool installation authorized by founder. Running wsl --install -d Ubuntu --no-launch. Installer reports Virtual Machine Platform and Windows Subsystem for Linux optional components installed; WSL package/Ubuntu installation still in progress. Do not treat toolchain as ready or send transactions. Do not auto-reboot.
+During authorized WSL download: bilingual OTP mail template prepared at supabase/templates/email-otp.html (not published); template boundary test added; public build marker scanner added. No emails or external configuration changed.
+Session follow-up: auth-api tests now 6 pass including session replacement/logout invalidation and failed-verification/oversize rejection; lint/typecheck pass. pnpm audit --prod reports no known vulnerabilities. EMAIL_LAUNCH_CHECKLIST.md prepared; live sends still disabled. WSL download reached 30 percent.
+WSL and Ubuntu installer completed successfully. System explicitly requires reboot; Rust/Solana/Anchor installation blocked until reboot. Progress saved in RESUME.md; no automatic reboot.
+Founder screenshot confirms Supabase custom SMTP saved for noreply@hellotcm.world, Resend465; delivery not yet tested. Ubuntu installation completed, WSL uname confirms Linux; curl present, Rust/Solana/Anchor absent. Preparing OS build dependencies under prior authorization.
+Founder confirmed OTP templates saved. Local loopback-only managed email registration testing enabled via ignored env AUTH_EMAIL_TEST_ENABLED; public launch remains gated. lint/typecheck pass; actual delivery and code verification awaiting founder browser test. WSL apt security-index DNS failure being retried with strict failure mode.
+Live email acceptance: founder confirmed receipt of OTP email and successful sign-in in local browser. Managed signup/OTP/cookie UI happy path now manually verified. Do not claim public launch, account revocation or journal readiness; CAPTCHA/privacy gates remain.
+Ubuntu strict apt update and build dependencies installed successfully. Rust installer session55293 and Solana installer session2699 running. solana/programs/demo-escrow source scaffold added with capped test amount, random ID, signer/PDA/recipient constraints and funded/released/refunded transitions. Uncompiled/untested; no deployment or transaction. M2 real journals gated; founder priority moves to independent Devnet demo.
+M3 toolchain checkpoint: Rust1.99.0, Solana4.3.0 and Anchor1.2.1 installed; cargo check --locked passed. Devnet genesis read-only check matches expected cluster. SBF compile session26432 running. Local-validator test source typechecks, execution pending. Website: pnpm test 68/68 (12 files); pnpm build/lint and public-bundle marker scan passed. Removed unused vulnerable Anchor JS dependency. web3.js1.99.0 dev-only audit still reports four moderate transitive findings (jayson uuid/stream-json); peers check fails TS6 vs codecs TS5 and optional utf8 version. Do not bundle SDK into website or claim clean full audit. Production audit pending repeat. No chain deployment or transaction.
+M3 actual execution: first SBF build passed and local-validator funding/release/refund plus attacker/recipient/PDA/state/amount/expiry rejection tests passed. PRD review identified separate vault PDA requirement; source and test now updated to separate escrow-state and funds-vault PDAs. Revised SBF build session65341 running; revised validator suite NOT yet executed. Prior pass does not establish revised source correctness. Validator old session63831 stopped. pnpm audit --prod and lint pass. Anchor install complete1.2.1.
+Separate-vault revision SBF compilation and actual local-validator test both passed. State and funds use separate constrained program-owned PDAs. Attacker/recipient/wrong-vault failures preserve funds; exact release and timed refund verified. No Devnet transaction. Validator session28948 running. Bilingual UI now describes verified local status, limits, locked rent and unsolicited-fund limitation. Website regression being repeated.
+Latest verified checkpoint: independent state/vault PDA SBF compile and actual validator suite pass, including balance preservation under rejected attacks. Solana Kit8.4.0 replaces legacy web3.js; legacy Anchor JS package removed. Full pnpm audit reports no known vulnerabilities; pnpm peers check passes. Website pnpm build/typecheck, lint, test70/70 across13files and public bundle marker scan pass. Explicit Wallet Standard connection added in both languages; no transaction-signing action enabled. No Devnet deployment/signatures. Supersedes prior dependency/test-pending statements.
+Final program public identity synchronized to4PovBNQwgpgJyxXjtsdsUPWMu4bWrYnJt8dkmAuT4r2B; final SBF build and actual local validator suite passed (session83315 exit0). Final artifactSHA25665B6E0F3DB57BA20BA4602F8544C92C0FBD7A58DD6869CD2A2BD5D269922AED9. DEVNET_DEPLOYMENT_REVIEW.md prepared. No deployment or chain transaction sent. Founder has wallet and can personally sign. Public deployment requires explicit approval under AGENTS rule6; wallet simulation/sign/confirmation remains pending. Preview6887 serves latest dist; validator16558 local only.
+2026-10-11 latest: founder explicitly approved reviewed Devnet deployment. prepare-devnet.sh created private deployment key (not exposed), official faucet failed, public payer4CDKMknT9HfksniUUucHxxEcotkgYqDzpnwVakSTn5uJ balance0SOL. deploy-devnet.sh stops before broadcast for insufficient funds. Await founder test SOL, not deployment reapproval. Browser simulation/signature message validation/confirmation code and bilingual explicit deposit UI implemented, real wallet flow unverified. 73tests/14files pass; targeted5tests pass; build/typecheck/lint/audit/peers/6-asset marker scan pass. Demo-only Devnet CSP verified by actual HTTP; journal no-store and no Devnet access. Preview nowsession52207. Validator16558 local only. No Devnet deployment/transaction signature.
+Founder requested help moving own Devnet funds from MetaMask. Added temporary bilingual founder deployment funding UI and fixed SystemProgram transfer helper: only public founder7Vw7cQoJqxR3DQpWnpXTtE9Wq2BNzxkqep2b6vkCMwVE to deployment4CDKMknT9HfksniUUucHxxEcotkgYqDzpnwVakSTn5uJ, exactly1.6testSOL, Devnet genesis checked, simulate before wallet sign, signed-message unchanged check, confirmed result only. Refuses funding if receiver already has>=1.5SOL. No auto-sign; explicit separate checkbox; current-tab attempt lock. Browser wallet compatibility/actual transfer remains unverified. No mainnet supported. Remove setup UI before public launch.
+Founder funding helper checks complete: full pnpm test74/74 across14files, targeted6pass, lint and build/typecheck pass. Public bundle marker scan6filespass and /demo/solana HTTP200. Actual MetaMask connection/transfer requires founder browser test; no deployment success claimed.
+Fixed pre-broadcast funding failures incorrectly left in confirmation lock: now phase progress/localized failure/current connected Solana address shown, method bound to wallet feature, retry only reopened before any broadcast attempt. After broadcast uncertainty remains locked. Actual Devnet preparation and simulation reached the signing callback in a no-sign/no-broadcast Node check; read-only check passed. Founder browser signing remains unverified; deployment balance0SOL. Targeted6tests and build passed; wrong-account retry regression being checked. No credentials logged.
+## 2026-10-11 — Founder pricing change
+- Homepage and both locales: provisional $99 USD/person; booking deposit displayed as 1 Solana Devnet test SOL. Test tokens do not offset offline fees or confirm bookings.
+- Client amount 1,000,000,000 lamports; contract maximum 1,000,000,000 lamports. Founder deployment funding stays separately at 1.6 test SOL.
+- pnpm test: 74/74 passed; pnpm lint and pnpm build (including TypeScript) passed. SBF build passed.
+- Consent copy v2 requires applying supabase/migrations/202610110003_pricing_consent.sql to the existing Supabase project before new booking submissions. Local migration tested; cloud migration not applied.
+- New artifact SHA256: 329e03384fda9c934bb2f3bd03d5e0739b3747586a7efb8189be04fa65e729d9. Prior deployment script deliberately retains the approved old hash and rejects this changed artifact. No deployment or Devnet transfer performed.
+Local validator: PASS — actual 1 SOL fund, exact release, timed refund and adversarial rejection; local only, no Devnet transfer.
+
+## 2026-10-11 — Pricing synchronization complete
+- Supabase pricing consent migration applied through authenticated dashboard. Read-only query verifies draft-v2 active, SECURITY DEFINER true, empty search_path, anon/authenticated execute false.
+- Local preview restarted: session74093, http://127.0.0.1:4173, Supabase mode. Previous local auth sessions may require sign-in again after restart.
+- Live synthetic end-to-end checks in en and zh-CN: POST /api/bookings 201, GET /api/receipts/:reference 200, status REQUESTED. Only fictional name and example.test email used, references not logged.
+- Browser confirms $99 and 1 SOL Devnet deposit in both languages. Screenshot .local-data/home-pricing-verified.png. Previous cloud-migration-pending checkpoint is superseded.
+- User deferred test coin funding; no Devnet transaction/deployment attempted. Real booking and health collection still gated by outstanding operational/privacy review.
+
+2026-10-11: Founder requested shutdown pause. Work paused. Full resume checkpoint appended to RESUME.md. All source, migration and validation progress saved on local disk; no commit/push/public deploy. Wait for founder restart/continue instruction.
+
+2026-10-11 resumed: local preview46052 HTTP200. M4 preparation: README corrected, RELEASE_READINESS.md and INCIDENT_PLAYBOOK.md drafted; escrow signer receiver binding fixed. pnpm test74/74, lint, build/typecheck, audit and peer compatibility checks run. No public deployment/Devnet transfer, funding deferred. M4 not complete: registration challenge/revocation, hosting, privacy/operator/retention controls and manual actual-wallet flow remain open.
+
+2026-10-11 M4 auth hardening: session GET now has separate 60/min/IP read budget and rejects Sec-Fetch-Site cross-site. OTP limits remain5/min and do not share read counters. Tests cover throttle, other-IP isolation, expiry, no-store, and unaffected OTP attempts. pnpm test75/75, lint and build/typecheck passed. Preview restarted31106; restart invalidates local sessions. Public registration still blocked by challenge/hosting/account notices; asked founder for operator name and public email, answer pending. No coins/deployment/health collection.
+Live HTTP verification correction: initial exact header-string assertion rejected equivalent combined no-store values; parsed directives and confirmed normal200 and cross-site403 with no-store. No security control failure.
+
+2026-10-11 founder supplied public operator identity: 小禾; public privacy contact li.yu.heng@qq.com. Both locale dictionaries and shared EmailLogin now show operator, mailto contact, managed email processing through Supabase/Resend, Singapore Supabase hosting and unresolved review/retention/rights handling. Account notice draft version2026-10-11-account-draft-v1. This is a draft notice, not consent evidence or public registration enablement. Check run in progress. No email sent to the contact.
+Account notice final verification: pnpm test75/75, pnpm lint and pnpm build including TypeScript passed. Built login page served by preview31106. Draft notice only, no public launch.
+
+2026-10-11 auth challenge integration: shared bilingual Challenge widget extracted from Booking; auth uses action auth, booking uses booking. Auth challenge configured via existing TURNSTILE_SITE_KEY/SECRET_KEY. Server validates success/exact hostname/action and fails closed on missing token, failed verification or provider outage; incomplete auth config throws. Token reset after each attempt; switching locale retains email/code but clears challenge for fresh verification. Local no-key test behavior unchanged; public registration still disabled by main.ts loopback-only gate. Tests78/78, lint/build/typecheck passed. Actual Cloudflare verification not tested without founder keys. Founder asked to create Managed test widget for127.0.0.1 (production separately hellotcm.world); secrets enter .env locally, never chat. No public launch or coin transfer.
+2026-10-12: Turnstile founder reports usable; bilingual auth widget accessibility label fixed. Hosting handoff guide drafted, platform question pending. No public deployment/gate changes.
+
+2026-10-12 founder chose Vercel and requested deployment. Preparation: vercel.json SPA/security headers; API catchall read-only demo gate; .vercelignore excludes .env/local DB/private artifacts. tsconfig includes API. Full79tests pass pluslint/build; final localhost-only founder funding UI visibility change receiving targeted checks. Do not claim hosted signup works: current Vercel adapter intentionally disables auth/booking writes until shared state, provider controls and privacy gates are ready. Local tested flows remain independent. Founder asked to login Vercel; login pending. No deployment, upload, Git commit or push performed yet. No paid plan created. Hobby personal/noncommercial restrictions previously explained; no commercial launch inferred.
+Vercel logged-in dashboard verified; safe deployment zip prepared; UI upload chooser blocked, no successful upload/deployment. Page-provided official plugin entry opened to resolve tooling.
+Deployment not complete: no project upload confirmed. Source zip ready; Vercel browser file chooser unsupported and official CLI downloader failed. User manual upload can unblock without repository publication or secret transmission.
+2026-10-13: local managed session status validation implemented; exact user mismatch and provider error invalidate session. Vite test scanning restricted to source trees, avoiding staged deployment duplicates. RELEASE_READINESS updated; shared Vercel auth remains incomplete. Await Ready URL/error for hosted verification.
+2026-10-13 Vercel live verification found API500 and nested404 despite static200. Node entry/rewrite fix prepared and local HTTP regression82tests/lint/build pass; new api-fix zip ready. Online update/re-verification pending, do not label release verified.
+2026-10-13 founder supplied target https://github.com/liyuhengha-png/first-tcm-experience and authorized repository upload following proposed init/commit/push workflow. Remote initially empty; local main initialized.85files staged; .env/local-data/wallet keys/evidence/logs ignored; configured secret/private-key scan passed without exposing values. Code regression82/82 +lint/build previously passed. Commit/push now proceeding; verify remote before claiming success.
